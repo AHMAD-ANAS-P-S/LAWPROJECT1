@@ -209,15 +209,14 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
         </div>
 
         {/* Photorealistic dark mahogany judge's gavel and antique Indian Law book */}
-        <div className="pt-2 sm:pt-4 select-none relative -mb-3 sm:-mb-6 flex justify-start">
-          <div className="w-52 sm:w-60 md:w-64 rounded-2xl overflow-hidden border border-amber-500/25 shadow-2xl bg-black/40">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/gavel_hammer_book_ref.jpg"
-              alt="Judge Gavel on Antique Law Book"
-              className="w-full h-auto object-cover block"
-            />
-          </div>
+        <div className="pt-2 sm:pt-3 select-none pointer-events-none relative -mb-4 sm:-mb-6 flex justify-start">
+          <div className="absolute -inset-4 bg-amber-500/15 rounded-full blur-2xl -z-10" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/gavel_hammer_book_alone.png"
+            alt="Judge Gavel Hammer on Sounding Block and Law Book Alone"
+            className="w-72 sm:w-80 md:w-96 lg:w-[410px] max-w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] -ml-2 sm:-ml-3"
+          />
         </div>
       </div>
 

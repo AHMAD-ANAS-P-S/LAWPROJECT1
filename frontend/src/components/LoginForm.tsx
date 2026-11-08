@@ -196,15 +196,21 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           and antique leather law book with gold page edges in warm library setting,
           matching exact reference media_1794151817541_e3401a4a.jpg.
         */}
-        <div className="pt-2 select-none">
-          <div className="w-52 sm:w-60 md:w-64 rounded-2xl overflow-hidden border border-amber-500/25 shadow-2xl bg-black/40 hover:border-amber-400/50 transition-all">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/gavel_hammer_book_ref.jpg"
-              alt="Wooden Judge Gavel on Sounding Block and Law Book"
-              className="w-full h-auto object-cover object-center block"
-            />
-          </div>
+        {/* 
+          Judge's hammer (gavel), sounding block (bar), and antique law book ALONE 
+          floating seamlessly in the warm law library setting without any card or box frame,
+          matching exact reference media_1794155816375_fac2c5fc.jpg.
+        */}
+        <div className="pt-2 sm:pt-3 select-none pointer-events-none relative -mb-4 sm:-mb-6 flex justify-start">
+          {/* Subtle warm golden ambient back-glow for depth */}
+          <div className="absolute -inset-4 bg-amber-500/15 rounded-full blur-2xl -z-10" />
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/gavel_hammer_book_alone.png"
+            alt="Judge Gavel Hammer on Sounding Block and Law Book Alone"
+            className="w-72 sm:w-80 md:w-96 lg:w-[410px] max-w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] -ml-2 sm:-ml-3"
+          />
         </div>
       </div>
 

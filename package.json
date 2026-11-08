@@ -1,0 +1,12 @@
+{
+  "name": "tamil-raw-library",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tamil Raw Library - Indian Government Acts, Rules, Amendments & Subscription Platform",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm start",
+    "lint": "cd frontend && npm run lint"
+  }
+}

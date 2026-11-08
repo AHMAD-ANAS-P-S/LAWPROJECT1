@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Custom law theme utilities */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFDF79 0%, #D4AF37 50%, #B38728 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.purple-gradient-btn {
+  background: linear-gradient(135deg, #6B21A8 0%, #4C1D95 100%);
+  transition: all 0.25s ease-in-out;
+}
+
+.purple-gradient-btn:hover {
+  background: linear-gradient(135deg, #7E22CE 0%, #581C87 100%);
+  box-shadow: 0 10px 25px -5px rgba(107, 33, 168, 0.4);
+}
+
+.gold-border-glow {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* Smooth transitions */
+* {
+  box-sizing: border-box;
+}

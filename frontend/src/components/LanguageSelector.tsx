@@ -27,7 +27,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
       {/* Small, elegant rounded selector with dark purple background and gold/purple border */}
-      <div className="flex items-center bg-[#250A36]/85 hover:bg-[#320D4A]/90 backdrop-blur-md border border-[#8A46B5]/40 hover:border-amber-400/50 rounded-full px-3.5 py-1.5 shadow-lg text-xs text-white transition-all duration-200">
+      <div className="flex items-center bg-[#250A36]/85 hover:bg-[#320D4A]/90 backdrop-blur-md border border-[#8A46B5]/40 hover:border-amber-400/50 rounded-full px-2.5 sm:px-3.5 py-1 sm:py-1.5 shadow-lg text-[11px] sm:text-xs text-white transition-all duration-200">
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}

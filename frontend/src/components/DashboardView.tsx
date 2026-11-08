@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
+  Menu,
   LayoutDashboard,
   BookOpen,
   ScrollText,
@@ -89,6 +90,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [activeNav, setActiveNav] = useState(initialNav);
   const [lang, setLang] = useState<'en' | 'ta'>('en');
   const [currentUser, setCurrentUser] = useState<any>(user);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navRouteMap: Record<string, string> = {
     dashboard: '/dashboard',
@@ -117,6 +119,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   };
 
   const handleNavChange = (id: string) => {
+    setIsMobileMenuOpen(false);
     setActiveNav(id);
     const targetRoute = navRouteMap[id];
     if (targetRoute && typeof window !== 'undefined' && window.location.pathname !== targetRoute) {
@@ -1120,47 +1123,58 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         STICKY TOP HEADER BAR
         Deep burgundy background (#240308) with golden branding and controls
       */}
-      <header className="sticky top-0 z-50 w-full bg-[#240308] border-b border-amber-900/40 px-4 sm:px-6 py-2 flex items-center justify-between text-white shadow-md">
-        {/* Left Branding */}
-        <div className="flex items-center gap-2.5 sm:gap-3 cursor-pointer" onClick={() => handleNavChange('dashboard')}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/scales_logo_hd.png"
-            alt="Tamil Raw Library Scales Logo"
-            className="w-8 h-7 sm:w-9 sm:h-8 object-contain drop-shadow"
-          />
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="font-serif font-bold text-base sm:text-lg text-[#F5DEB3] tracking-tight">
-                Tamil Raw Library
-              </span>
-              <span className="hidden sm:inline text-xs text-amber-200/50">|</span>
-              <span className="hidden sm:inline text-xs font-medium text-amber-200/90 tracking-wide">
-                Legal Acts Subscription Platform
+      <header className="sticky top-0 z-40 w-full bg-[#240308] border-b border-amber-900/40 px-3 sm:px-6 py-2 flex items-center justify-between text-white shadow-md">
+        {/* Left Branding & Mobile Hamburger */}
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-1.5 rounded-lg bg-[#4A0E18] text-amber-300 border border-amber-500/30 hover:bg-[#5D1220] transition-colors shrink-0"
+            aria-label="Toggle navigation menu"
+          >
+            <Menu className="w-5 h-5 text-amber-300" />
+          </button>
+
+          <div className="flex items-center gap-2 sm:gap-2.5 cursor-pointer min-w-0" onClick={() => handleNavChange('dashboard')}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/scales_logo_hd.png"
+              alt="Tamil Raw Library Scales Logo"
+              className="w-7 h-6 sm:w-9 sm:h-8 object-contain drop-shadow shrink-0"
+            />
+            <div className="flex flex-col min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-serif font-bold text-sm sm:text-base md:text-lg text-[#F5DEB3] tracking-tight truncate">
+                  Tamil Raw Library
+                </span>
+                <span className="hidden sm:inline text-xs text-amber-200/50">|</span>
+                <span className="hidden md:inline text-xs font-medium text-amber-200/90 tracking-wide">
+                  Legal Acts Subscription Platform
+                </span>
+              </div>
+              <span className="text-[9px] sm:text-[10px] text-amber-100/70 leading-tight truncate">
+                Indian Government Acts, Rules &amp; Amendments
               </span>
             </div>
-            <span className="text-[10px] text-amber-100/70 leading-tight">
-              Indian Government Acts, Rules &amp; Amendments
-            </span>
           </div>
         </div>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-2.5 sm:gap-3.5">
+        <div className="flex items-center gap-1.5 sm:gap-3.5 shrink-0">
           {/* English | தமிழ் Toggle */}
-          <div className="bg-[#4A0E18] border border-amber-500/30 rounded-full px-2 py-0.5 text-xs font-semibold flex items-center gap-1 shadow-inner">
+          <div className="bg-[#4A0E18] border border-amber-500/30 rounded-full px-1.5 sm:px-2 py-0.5 text-xs font-semibold flex items-center gap-0.5 sm:gap-1 shadow-inner">
             <button
               onClick={() => setLang('en')}
-              className={`px-2 py-0.5 rounded-full transition-all text-[11px] ${
+              className={`px-1.5 sm:px-2 py-0.5 rounded-full transition-all text-[10px] sm:text-[11px] ${
                 lang === 'en' ? 'bg-white text-[#240308] font-bold shadow-sm' : 'text-amber-100/80 hover:text-white'
               }`}
             >
               English
             </button>
-            <span className="text-amber-400/40 text-[10px]">|</span>
+            <span className="text-amber-400/40 text-[9px] sm:text-[10px]">|</span>
             <button
               onClick={() => setLang('ta')}
-              className={`px-2 py-0.5 rounded-full transition-all text-[11px] ${
+              className={`px-1.5 sm:px-2 py-0.5 rounded-full transition-all text-[10px] sm:text-[11px] ${
                 lang === 'ta' ? 'bg-[#9E2A2B] text-white font-bold shadow-sm' : 'text-amber-100/80 hover:text-white'
               }`}
             >
@@ -1169,29 +1183,130 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
 
           {/* Notification Bell with red indicator */}
-          <button className="relative p-1.5 rounded-full bg-[#4A0E18] hover:bg-[#5D1220] transition-colors border border-amber-500/30">
+          <button className="relative p-1 sm:p-1.5 rounded-full bg-[#4A0E18] hover:bg-[#5D1220] transition-colors border border-amber-500/30">
             <Bell className="w-3.5 h-3.5 text-amber-300" />
             <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-[#240308]" />
           </button>
 
           {/* User Profile Pill */}
-          <div className="flex items-center gap-1.5 bg-[#4A0E18] border border-amber-500/30 rounded-full pl-1.5 pr-2.5 py-1 cursor-pointer hover:bg-[#5D1220] transition-colors">
+          <div className="flex items-center gap-1 sm:gap-1.5 bg-[#4A0E18] border border-amber-500/30 rounded-full p-1 sm:pl-1.5 sm:pr-2.5 sm:py-1 cursor-pointer hover:bg-[#5D1220] transition-colors">
             <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold text-white">
               <Users className="w-3 h-3 text-white" />
             </div>
-            <span className="text-xs font-medium text-white max-w-[130px] truncate">{userName}</span>
-            <ChevronDown className="w-3 h-3 text-amber-300/80" />
+            <span className="hidden sm:inline text-xs font-medium text-white max-w-[120px] truncate">{userName}</span>
+            <ChevronDown className="hidden sm:inline w-3 h-3 text-amber-300/80" />
           </div>
         </div>
       </header>
 
       {/* BODY: SIDEBAR + MAIN CONTENT */}
-      <div className="flex-1 flex w-full">
+      <div className="flex-1 flex w-full relative">
         {/* 
-          LEFT SIDEBAR:
-          Deep wine / dark maroon background (#2D050C) with Lady Justice + Books at bottom
+          MOBILE NAVIGATION DRAWER BACKDROP & SLIDE-OUT ASIDE
         */}
-        <aside className="w-52 sm:w-60 bg-[#2D050C] border-r border-amber-900/30 flex flex-col justify-between p-2.5 shrink-0 text-white select-none shadow-xl sticky top-[49px] h-[calc(100vh-49px)] overflow-y-auto">
+        {isMobileMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black/75 z-50 lg:hidden backdrop-blur-xs transition-opacity duration-200"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+
+        <aside
+          className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-[#2D050C] border-r border-amber-900/40 flex flex-col justify-between p-3.5 text-white select-none shadow-2xl transition-transform duration-300 ease-in-out lg:hidden overflow-y-auto ${
+            isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div>
+            {/* Drawer Header with Close Button */}
+            <div className="flex items-center justify-between pb-3 mb-2 border-b border-amber-900/40">
+              <div
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={() => {
+                  handleNavChange('dashboard');
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/scales_logo_hd.png"
+                  alt="Tamil Raw Library Scales Logo"
+                  className="w-7 h-6 object-contain drop-shadow shrink-0"
+                />
+                <div className="flex flex-col">
+                  <span className="font-serif font-bold text-sm text-[#F5DEB3] tracking-tight">
+                    Tamil Raw Library
+                  </span>
+                  <span className="text-[9px] text-amber-100/70 leading-tight">
+                    Legal Acts Platform
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-1.5 rounded-lg bg-[#4A0E18] text-amber-300 hover:text-white hover:bg-[#5D1220] transition-colors border border-amber-500/30"
+                aria-label="Close navigation"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Navigation links */}
+            <nav className="space-y-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeNav === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      handleNavChange(item.id);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-all text-left ${
+                      isActive
+                        ? 'bg-gradient-to-r from-[#F6BD60] to-[#E59866] text-[#240308] font-bold shadow-md'
+                        : 'text-amber-100/80 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#240308]' : 'text-amber-300/80'}`} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+
+              <div className="pt-2">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    handleLogoutClick();
+                  }}
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-rose-200/90 hover:text-white hover:bg-rose-950/40 transition-colors text-left"
+                >
+                  <LogOut className="w-3.5 h-3.5 text-rose-400" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            </nav>
+          </div>
+
+          {/* Drawer Footer: Lady Justice and Law Books */}
+          <div className="pt-2 -mx-3.5 -mb-3.5 overflow-hidden select-none flex items-end justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/sidebar_lady_justice_books_alpha.png?v=clean_v1"
+              alt="3D Lady Justice and Law Books"
+              className="w-full h-auto object-contain max-h-44 drop-shadow-lg"
+            />
+          </div>
+        </aside>
+
+        {/* 
+          DESKTOP LEFT SIDEBAR:
+          Hidden on mobile, visible on lg screens
+        */}
+        <aside className="hidden lg:flex w-52 sm:w-60 bg-[#2D050C] border-r border-amber-900/30 flex-col justify-between p-2.5 shrink-0 text-white select-none shadow-xl sticky top-[49px] h-[calc(100vh-49px)] overflow-y-auto">
           <nav className="space-y-0.5">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -1238,7 +1353,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           MAIN CONTENT AREA:
           Renders Browse Rules, Browse Acts, OR default Dashboard view
         */}
-        <main className="flex-1 p-3.5 sm:p-5 space-y-3.5 max-w-[1300px] overflow-y-auto">
+        <main className="flex-1 min-w-0 w-full p-2.5 sm:p-5 space-y-3 sm:space-y-3.5 max-w-[1300px] overflow-y-auto">
           {activeNav === 'help' ? (
             /* ========================================================================= */
             /* HELP & HOW TO USE VIEW - Exact recreation of media_1794145962956_ee05a6ee.jpg */
@@ -2797,7 +2912,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* MAIN SEARCH BAR */}
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5">
                 <div className="flex-1 bg-white rounded-xl shadow-xs border border-stone-200 p-1.5 px-3 flex items-center gap-2">
                   <div className="text-stone-400">
                     <Search className="w-4 h-4 text-[#6B0F1A]" />
@@ -3260,7 +3375,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* SEARCH & ADVANCED SEARCH BAR */}
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5">
                 <div className="flex-1 bg-white rounded-xl shadow-xs border border-stone-200 p-1.5 px-3 flex items-center gap-2">
                   <div className="text-stone-400">
                     <Search className="w-4 h-4 text-[#6B0F1A]" />
@@ -3569,7 +3684,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* SEARCH & ADVANCED SEARCH BAR */}
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5">
                 <div className="flex-1 bg-white rounded-xl shadow-xs border border-stone-200 p-1.5 px-3 flex items-center gap-2">
                   <div className="text-stone-400">
                     <Search className="w-4 h-4 text-[#6B0F1A]" />
@@ -3849,7 +3964,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* SEARCH & ADVANCED SEARCH BAR */}
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5">
                 <div className="flex-1 bg-white rounded-xl shadow-xs border border-stone-200 p-1.5 px-3 flex items-center gap-2">
                   <div className="text-stone-400">
                     <Search className="w-4 h-4 text-[#6B0F1A]" />

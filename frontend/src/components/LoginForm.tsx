@@ -131,7 +131,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-between text-white space-y-4 sm:space-y-5">
         {/* Main Heading matching reference */}
         <div className="space-y-2">
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-bold tracking-tight leading-[1.14] text-white drop-shadow-md">
+          <h1 className="font-serif text-2xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-bold tracking-tight leading-[1.14] text-white drop-shadow-md">
             Access India’s <br />
             Legal Knowledge <br />
             in Your Language
@@ -209,7 +209,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <img
             src="/gavel_hammer_book_alone.png"
             alt="Judge Gavel Hammer on Sounding Block and Law Book Alone"
-            className="w-72 sm:w-80 md:w-96 lg:w-[410px] max-w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] -ml-2 sm:-ml-3"
+            className="w-56 sm:w-80 md:w-96 lg:w-[410px] max-w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] -ml-2 sm:-ml-3"
           />
         </div>
       </div>
@@ -218,7 +218,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         RIGHT-SIDE LOGIN CARD (~44% width on desktop, vertically centered)
       */}
       <div className="lg:col-span-6 xl:col-span-6 flex justify-center lg:justify-end">
-        <div className="w-full max-w-[420px] bg-white rounded-[26px] shadow-[0_25px_65px_rgba(0,0,0,0.6)] border border-white/95 p-6 sm:p-7 md:p-8 relative overflow-hidden">
+        <div className="w-full max-w-[420px] bg-white rounded-[22px] sm:rounded-[26px] shadow-[0_25px_65px_rgba(0,0,0,0.6)] border border-white/95 p-5 sm:p-7 md:p-8 relative overflow-hidden">
           {/* Login Card Heading */}
           <div className="text-center sm:text-left space-y-1 mb-4">
             <div className="flex items-center justify-center sm:justify-start gap-2.5 mb-1">

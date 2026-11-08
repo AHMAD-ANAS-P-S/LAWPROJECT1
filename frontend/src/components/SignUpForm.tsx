@@ -146,7 +146,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
       <div className="lg:col-span-5 flex flex-col justify-between text-white space-y-4 lg:space-y-5">
         {/* Main Heading with gold vertical bar */}
         <div className="space-y-2 border-l-4 border-amber-400 pl-4 sm:pl-5">
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight leading-[1.15] text-white drop-shadow-md">
+          <h1 className="font-serif text-2xl sm:text-4xl lg:text-[42px] font-bold tracking-tight leading-[1.15] text-white drop-shadow-md">
             Join Tamil <br />
             Law Library
           </h1>
@@ -215,14 +215,14 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
           <img
             src="/gavel_hammer_book_alone.png"
             alt="Judge Gavel Hammer on Sounding Block and Law Book Alone"
-            className="w-72 sm:w-80 md:w-96 lg:w-[410px] max-w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] -ml-2 sm:-ml-3"
+            className="w-56 sm:w-80 md:w-96 lg:w-[410px] max-w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] -ml-2 sm:-ml-3"
           />
         </div>
       </div>
 
       {/* RIGHT SIGN UP CARD */}
       <div className="lg:col-span-7 w-full max-w-[420px] mx-auto lg:ml-auto lg:mr-0">
-        <div className="bg-white rounded-[26px] shadow-[0_25px_60px_rgba(0,0,0,0.55)] border border-white/90 p-6 sm:p-7 relative overflow-hidden">
+        <div className="bg-white rounded-[22px] sm:rounded-[26px] shadow-[0_25px_60px_rgba(0,0,0,0.55)] border border-white/90 p-5 sm:p-7 relative overflow-hidden">
           {/* Card Header */}
           <div className="text-center sm:text-left space-y-1 mb-4">
             <div className="flex items-center justify-center sm:justify-start gap-2.5 mb-1">

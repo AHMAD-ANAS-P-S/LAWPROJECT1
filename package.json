@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "description": "Tamil Raw Library - Indian Government Acts, Rules, Amendments & Subscription Platform",
+  "workspaces": [
+    "frontend"
+  ],
   "scripts": {
-    "dev": "cd frontend && npm run dev",
+    "dev": "npm --workspace=frontend run dev",
     "build": "cd frontend && npm run build",
-    "start": "cd frontend && npm start",
-    "lint": "cd frontend && npm run lint"
+    "start": "npm --workspace=frontend run start",
+    "lint": "npm --workspace=frontend run lint"
   }
 }

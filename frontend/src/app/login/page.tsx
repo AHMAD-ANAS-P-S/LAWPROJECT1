@@ -13,18 +13,17 @@ export default function LoginPage() {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('token');
       if (token) {
-        router.push('/dashboard');
+        window.location.href = '/dashboard';
       }
     }
-  }, [router]);
+  }, []);
 
   const handleLoginSuccess = (user: any, token: string) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      window.location.href = '/dashboard';
     }
-    // Navigate cleanly to /dashboard so URL reflects actual page
-    router.push('/dashboard');
   };
 
   return (

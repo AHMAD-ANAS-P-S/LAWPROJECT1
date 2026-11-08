@@ -307,7 +307,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   // Synchronize bookmarks with backend API
   React.useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/bookmarks')
+    fetch('/api/bookmarks')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
@@ -583,7 +583,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   // Fetch help data from backend if available
   React.useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/help/guides')
+    fetch('/api/help/guides')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
@@ -595,7 +595,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   const handleHelpFeedback = (guideId: number, isHelpful: boolean) => {
     setGuideFeedbackMap(prev => ({ ...prev, [guideId]: isHelpful ? 'helpful' : 'not_helpful' }));
-    fetch(`http://127.0.0.1:8000/api/help/feedback?guide_id=${guideId}&helpful=${isHelpful}`, {
+    fetch(`/api/help/feedback?guide_id=${guideId}&helpful=${isHelpful}`, {
       method: 'POST'
     })
       .then(res => res.json())
@@ -614,7 +614,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     e.preventDefault();
     if (!supportSubject.trim() || !supportDescription.trim()) return;
     setSupportSubmitting(true);
-    fetch('http://127.0.0.1:8000/api/help/tickets', {
+    fetch('/api/help/tickets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -675,7 +675,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [paymentSuccessMsg, setPaymentSuccessMsg] = useState('');
 
   React.useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/subscriptions/current')
+    fetch('/api/subscriptions/current')
       .then(res => res.json())
       .then(data => {
         if (data && data.package_name) {
@@ -2306,7 +2306,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                                 } else {
                                   setStarredBookmarkIds([...starredBookmarkIds, bm.id]);
                                 }
-                                fetch(`http://127.0.0.1:8000/api/bookmarks/${bm.id}/toggle-important`, { method: 'POST' }).catch(() => {});
+                                fetch(`/api/bookmarks/${bm.id}/toggle-important`, { method: 'POST' }).catch(() => {});
                               }}
                               className="p-1 rounded-md border border-stone-200 hover:bg-stone-50 transition-colors shadow-2xs"
                               title="Toggle Favorite"
@@ -4869,7 +4869,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     }
 
                     // Save to backend
-                    fetch('http://127.0.0.1:8000/api/bookmarks', {
+                    fetch('/api/bookmarks', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
@@ -5074,7 +5074,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       onClick={() => {
                         setIsProcessingPayment(true);
                         // Call backend Razorpay order API
-                        fetch('http://127.0.0.1:8000/api/subscriptions/create-order', {
+                        fetch('/api/subscriptions/create-order', {
                           method: 'POST',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify({
@@ -5085,7 +5085,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           .then(res => res.json())
                           .then(orderData => {
                             // Verify and activate
-                            return fetch('http://127.0.0.1:8000/api/subscriptions/verify-payment', {
+                            return fetch('/api/subscriptions/verify-payment', {
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
                               body: JSON.stringify({

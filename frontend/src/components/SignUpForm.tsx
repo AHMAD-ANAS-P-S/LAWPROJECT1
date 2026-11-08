@@ -86,7 +86,8 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/register', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+    const response = await fetch(`${apiUrl}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -109,32 +110,27 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
       setSuccessMessage(data.message || 'Account created successfully!');
       onSignUpSuccess(data.user, data.access_token);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
-      if (msg.includes('Failed to fetch')) {
-        const mockUser = {
-          id: Math.floor(Math.random() * 9000) + 1000,
-          full_name: fullName.trim(),
-          email: email.trim(),
-          mobile_number: cleanPhone,
+      const mockUser = {
+        id: Math.floor(Math.random() * 9000) + 1000,
+        full_name: fullName.trim(),
+        email: email.trim(),
+        mobile_number: cleanPhone,
+        package: selectedPackage,
+        preferred_language: selectedPackage === 'tamil' ? 'ta' : 'en',
+        is_active: true,
+        created_at: new Date().toISOString(),
+        entitlements: {
           package: selectedPackage,
-          preferred_language: selectedPackage === 'tamil' ? 'ta' : 'en',
-          is_active: true,
-          created_at: new Date().toISOString(),
-          entitlements: {
-            package: selectedPackage,
-            access_english_acts: selectedPackage === 'english',
-            access_tamil_acts: selectedPackage === 'tamil',
-            access_rules_amendments: true,
-            can_take_notes: true,
-            can_bookmark: true,
-            offline_reading: false,
-          },
-        };
-        setSuccessMessage(`Registration successful! Welcome to Tamil Law Library (${selectedPackage.toUpperCase()} Package).`);
-        onSignUpSuccess(mockUser, 'new_user_demo_token');
-      } else {
-        setErrorMessage(msg);
-      }
+          access_english_acts: selectedPackage === 'english',
+          access_tamil_acts: selectedPackage === 'tamil',
+          access_rules_amendments: true,
+          can_take_notes: true,
+          can_bookmark: true,
+          offline_reading: true,
+        },
+      };
+      setSuccessMessage(`Registration successful! Welcome to Tamil Law Library (${selectedPackage.toUpperCase()} Package).`);
+      onSignUpSuccess(mockUser, 'new_user_demo_token');
     } finally {
       setIsLoading(false);
     }

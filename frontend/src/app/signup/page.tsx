@@ -12,8 +12,8 @@ export default function SignUpPage() {
     if (typeof window !== 'undefined') {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      window.location.href = '/dashboard';
     }
-    router.push('/dashboard');
   };
 
   return (

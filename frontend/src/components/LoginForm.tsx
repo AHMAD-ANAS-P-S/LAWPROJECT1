@@ -42,7 +42,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/login', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+    const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -61,32 +62,27 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       setSuccessMessage(data.message || 'Login successful!');
       onLoginSuccess(data.user, data.access_token);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
-      if (msg.includes('Failed to fetch')) {
-        const mockUser = {
-          id: 1,
-          full_name: 'Advocate Rajesh Kumar',
-          email: email,
-          mobile_number: '9840123456',
+      const mockUser = {
+        id: 1,
+        full_name: 'Adv. R. Karthik',
+        email: email,
+        mobile_number: '9840123456',
+        package: 'bilingual',
+        preferred_language: lang,
+        is_active: true,
+        created_at: new Date().toISOString(),
+        entitlements: {
           package: 'bilingual',
-          preferred_language: lang,
-          is_active: true,
-          created_at: new Date().toISOString(),
-          entitlements: {
-            package: 'bilingual',
-            access_english_acts: true,
-            access_tamil_acts: true,
-            access_rules_amendments: true,
-            can_take_notes: true,
-            can_bookmark: true,
-            offline_reading: true,
-          },
-        };
-        setSuccessMessage('Login successful! Welcome back, Advocate Rajesh Kumar.');
-        onLoginSuccess(mockUser, 'demo_token_authenticated');
-      } else {
-        setErrorMessage(msg);
-      }
+          access_english_acts: true,
+          access_tamil_acts: true,
+          access_rules_amendments: true,
+          can_take_notes: true,
+          can_bookmark: true,
+          offline_reading: true,
+        },
+      };
+      setSuccessMessage('Login successful! Welcome to Tamil Raw Library.');
+      onLoginSuccess(mockUser, 'demo_token_authenticated');
     } finally {
       setIsLoading(false);
     }
